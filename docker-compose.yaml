@@ -42,13 +42,15 @@ services:
 
   pingfederate:
     image: pingidentity/pingfederate:edge
-    command: wait-for pingdirectory:389 -t 300 -- entrypoint.sh start-server
+    command: wait-for pingdirectory:1389 -t 300 -- entrypoint.sh start-server
     environment:
       - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
       - SERVER_PROFILE_PATH=baseline/pingfederate
       - PING_IDENTITY_DEVOPS_USER=PING_IDENTITY_DEVOPS_USER
       - PING_IDENTITY_DEVOPS_KEY=PING_IDENTITY_DEVOPS_USER
       - PING_IDENTITY_ACCEPT_EULA=YES
+      - PF_LDAP_USERNAME=administrator
+      - PF_LDAP_PASSWORD=2FederateM0re
     ports:
       - 9031:9031
       - 9999:9999
@@ -67,8 +69,9 @@ services:
       - PING_IDENTITY_DEVOPS_KEY=PING_IDENTITY_DEVOPS_USER
       - PING_IDENTITY_ACCEPT_EULA=YES
     ports:
-      - 1636-1646:636
-      - 1443-1453:443
+      - "1636:1636"
+      - "1443:1443"
+      - "1389:1389"
     networks:
       - pingnet-internal
     volumes:
