@@ -20,6 +20,10 @@ When you create an environment on Ping Cloud with PingFederate, Ping asks you to
 
 PingFederate has [many features](https://www.pingidentity.com/en/resources/client-library/data-sheets/pingfederate-data-sheet.html), but it does not store users at all; for that, you're going to need a database. PingDirectory is the recommended product provided by them for that, and it's [LDAP compliant](https://www.pingidentity.com/en/resources/client-library/data-sheets/3196-pingdirectory-data-sheet.html). So technically, you can use an Azure AD rather than PingDirectory.
 
+### {JWKError}Incorrect key type. Expected: 'RSA', Received: EC / Expected: 'oct', Received: EC / Key must be 256 bit for alg A256KW
+
+Using the default configuration from PingFederate and the setup provided by [OAuth Playground](https://docs.pingidentity.com/bundle/pingfederate-103/page/lco1625223221631.html), I used the App Client `ac_oic_client` for Authorization Code grant type, but I got many errors like `Expected: 'oct', Received: EC` when trying to [decode the `id_token`](https://github.com/willianantunes/ping-identity-auth-playground/blob/b8caf4b7d9da5f651e286af6fb3dc4dacc4bd69e/ping_identity_auth_playground/apps/core/services/oidc_provider.py#L143-L145). To fix it, LOREM IPSUM DOLOR SIT AMET.
+
 ## Links
 
 Projects:
