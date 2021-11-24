@@ -11,15 +11,16 @@ version: "2.4"
 #-   +----------------+    +---------------+    +---------------+    +---------------+
 #-
 #-
-#-   +-----------------------+--------------------------------------------------------+
-#-   |  Product Console/App  |  URL                                                   |
-#-   |                       |    username: administrator                             |
-#-   |                       |    password: 2FederateM0re                             |
-#-   +-----------------------+--------------------------------------------------------+
-#-   |  PingAccess           |  https://localhost:9000/                               |
-#-   |  PingFederate         |  https://localhost:9999/pingfederate/app               |
-#-   |  PingDirectory        |  https://localhost:8443/   (Server=pingdirectory)      |
-#-   +-----------------------+--------------------------------------------------------+
+#-   +-----------------------------------+------------------------------------------------------------+
+#-   |  Product Console/App              |  URL                                                       |
+#-   |                                   |    username: administrator                                 |
+#-   |                                   |    password: 2FederateM0re                                 |
+#-   +-----------------------------------+------------------------------------------------------------+
+#-   |  PingAccess                       |  https://localhost:9000/                                   |
+#-   |  PingFederate                     |  https://localhost:9999/pingfederate/app                   |
+#-   |  PingFederate OIDC Configuration  |  https://localhost:9031/.well-known/openid-configuration   |
+#-   |  PingDirectory                    |  https://localhost:8443/   (Server=pingdirectory:1389)     |
+#-   +-----------------------------------+------------------------------------------------------------+
 #--------------------------------------------------------------------------------------
 
 services:
@@ -52,6 +53,7 @@ services:
       - PF_LDAP_USERNAME=administrator
       - PF_LDAP_PASSWORD=2FederateM0re
     ports:
+      # https://stackoverflow.com/a/31300034/3899136
       - 9031:9031
       - 9999:9999
     networks:
