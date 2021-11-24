@@ -153,7 +153,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 #####
 # Custom settings for Auth0
 
-PING_IDENTITY_DOMAIN = "auth.pingone.com/795c9660-bad4-4508-9c1b-8c6c3cb9213e/as"
+# REDIRECT URIs: https://localhost:8443/api/v1/response-oidc
+PING_IDENTITY_DOMAIN = "localhost:9031"
 PING_IDENTITY_APP_CLIENT_ID = "PING_IDENTITY_APP_CLIENT_ID"
 PING_IDENTITY_APP_CLIENT_SECRET = "PING_IDENTITY_APP_CLIENT_SECRET"
 PING_IDENTITY_APP_SCOPES = ["openid", "profile", "email"]

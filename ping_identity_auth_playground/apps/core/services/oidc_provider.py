@@ -28,24 +28,38 @@ class OIDCConfigurationDocument:
     subject_types_supported: List[str]
     id_token_signing_alg_values_supported: List[str]
     token_endpoint_auth_methods_supported: List[str]
+    backchannel_authentication_endpoint: Optional[str] = None
+    pushed_authorization_request_endpoint: Optional[str] = None
     end_session_endpoint: Optional[str] = None
     registration_endpoint: Optional[str] = None
     introspection_endpoint: Optional[str] = None
     device_authorization_endpoint: Optional[str] = None
     mfa_challenge_endpoint: Optional[str] = None
     revocation_endpoint: Optional[str] = None
+    backchannel_token_delivery_modes_supported: Optional[List[str]] = None
     code_challenge_methods_supported: Optional[List[str]] = None
     request_object_signing_alg_values_supported: Optional[List[str]] = None
+    request_object_encryption_alg_values_supported: Optional[List[str]] = None
+    backchannel_authentication_request_signing_alg_values_supported: Optional[List[str]] = None
+    request_object_encryption_enc_values_supported: Optional[List[str]] = None
+    id_token_encryption_enc_values_supported: Optional[List[str]] = None
+    id_token_encryption_alg_values_supported: Optional[List[str]] = None
+    code_challenge_methods_supported: Optional[List[str]] = None
     response_modes_supported: Optional[List[str]] = None
     grant_types_supported: Optional[List[str]] = None
     userinfo_signing_alg_values_supported: Optional[List[str]] = None
     claim_types_supported: Optional[List[str]] = None
-    response_modes_supported: Optional[str] = None
-    claims_supported: Optional[str] = None
+    claims_supported: Optional[List[str]] = None
+    token_endpoint_auth_signing_alg_values_supported: Optional[List[str]] = None
     claims_parameter_supported: Optional[bool] = None
     request_uri_parameter_supported: Optional[bool] = None
     request_parameter_supported: Optional[bool] = None
-    introspection_endpoint: Optional[str] = None
+    require_pushed_authorization_requests: Optional[bool] = None
+    backchannel_user_code_parameter_supported: Optional[bool] = None
+    ping_revoked_sris_endpoint: Optional[str] = None
+    ping_session_management_sris_endpoint: Optional[str] = None
+    ping_session_management_users_endpoint: Optional[str] = None
+    ping_end_session_endpoint: Optional[str] = None
 
 
 class JWTPublicKey(TypedDict):
@@ -82,13 +96,13 @@ class OIDCProvider:
 
     @classmethod
     def configure_oidc_configuration_document(cls):
-        document = requests.get(f"https://{cls.domain}/.well-known/openid-configuration").json()
+        document = requests.get(f"https://{cls.domain}/.well-known/openid-configuration", verify=False).json()
 
         # First let's configure the OIDC configuration document
         cls.oidc_configuration_document = OIDCConfigurationDocument(**document)
 
         # Now the public keys to verify the JWT created by the Authorization Server
-        public_keys = requests.get(cls.oidc_configuration_document.jwks_uri).json()
+        public_keys = requests.get(cls.oidc_configuration_document.jwks_uri, verify=False).json()
 
         jwt_public_keys_algorithms = set()
         for public_key in public_keys["keys"]:
@@ -124,7 +138,7 @@ class OIDCProvider:
             "redirect_uri": redirect_uri,
             "scope": " ".join(cls.scopes),
         }
-        response = requests.post(token_endpoint, headers=headers, data=body, auth=app_credentials)
+        response = requests.post(token_endpoint, headers=headers, data=body, auth=app_credentials, verify=False)
         content = response.json()
         id_token = content["id_token"]
         access_token = content["access_token"]
@@ -162,6 +176,6 @@ class OIDCProvider:
             "Content-Type": "application/json",
             "Authorization": f"Bearer {access_token}",
         }
-        result = requests.get(userinfo_endpoint, headers=headers)
+        result = requests.get(userinfo_endpoint, headers=headers, verify=False)
         body = result.json()
         return body
