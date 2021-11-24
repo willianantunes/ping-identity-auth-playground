@@ -16,6 +16,10 @@ If you go with the [Try Ping](https://www.pingidentity.com/en/try-ping.html) and
 
 When you create an environment on Ping Cloud with PingFederate, Ping asks you to run one using Docker, or you can ask the company to deploy it for you on Ping Cloud. Why is it so difficult? I don't know, but you won't be able to because you're going to need a license. You can create a [DevOps Account](https://devops.pingidentity.com/get-started/devopsRegistration/). After you do it, you're going to receive a Compose file, but it has errors. Use [this one](./docker-compose.yaml) preferably, and you should be good to go!
 
+### If you only need authentication, you will probably need just PingFederate and PingDirectory.
+
+PingFederate has [many features](https://www.pingidentity.com/en/resources/client-library/data-sheets/pingfederate-data-sheet.html), but it does not store users at all; for that, you're going to need a database. PingDirectory is the recommended product provided by them for that, and it's [LDAP compliant](https://www.pingidentity.com/en/resources/client-library/data-sheets/3196-pingdirectory-data-sheet.html). So technically, you can use an Azure AD rather than PingDirectory.
+
 ## Links
 
 Projects:
