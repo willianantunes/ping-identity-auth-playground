@@ -10,7 +10,7 @@ version: "2.4"
 #-   |   PingAccess   |    | PingFederate  |    |PingDataConsole|    | PingDirectory |
 #-   +----------------+    +---------------+    +---------------+    +---------------+
 #-
-#-
+#-   chrome://flags/#allow-insecure-localhost
 #-   +-----------------------------------+------------------------------------------------------------+
 #-   |  Product Console/App              |  URL                                                       |
 #-   |                                   |    username: administrator                                 |
@@ -19,7 +19,9 @@ version: "2.4"
 #-   |  PingAccess                       |  https://localhost:9000/                                   |
 #-   |  PingFederate                     |  https://localhost:9999/pingfederate/app                   |
 #-   |  PingFederate OIDC Configuration  |  https://localhost:9031/.well-known/openid-configuration   |
-#-   |  PingDirectory                    |  https://localhost:8443/   (Server=pingdirectory:1389)     |
+#-   |  https://docs.pingidentity.com/bundle/pingfederate-103/page/lco1625223221631.html              |
+#-   |  OAuth Playground App             |  https://localhost:9031/OAuthPlayground                    |
+#-   |  PingDirectory                    |  https://localhost:8443/   (Server=pingdirectory:1636)     |
 #-   +-----------------------------------+------------------------------------------------------------+
 #--------------------------------------------------------------------------------------
 
