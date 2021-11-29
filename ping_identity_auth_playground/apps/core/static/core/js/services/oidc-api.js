@@ -5,7 +5,7 @@ export async function consultUserData() {
     method: "GET",
     timeout: 15 * 1000,
   }
-  options.url = "https://localhost:9443/api/v1/user-info"
+  options.url = "https://app.local:9443/api/v1/user-info"
   options.headers = { ...options.headers }
 
   const response = await axios(options)
