@@ -32,6 +32,10 @@ Using the default configuration from PingFederate and the setup provided by [OAu
 
 SSO does not work with a fresh version of PingFederate. I was using the OAuth Client `ac_oic_client` (the one that is automatically created by OAuth Playground Application). In order to make SSO works as expected, I followed [this documentation](https://docs.pingidentity.com/bundle/pingfederate-93/page/pmr1564002990528.html). In _AUTHENTICATION SESSIONS_ part, you have the checkbox ENABLE _AUTHENTICATION SESSIONS FOR ALL SOURCES_. Just activate it and SSO will work as expected. PingFederate will ask you all the time about the consent of the scopes, even though you had consented previously. Another issue that I'm trying to fix/configure properly. 
 
+### Consent approval is asked all the time
+
+[This document](https://docs.pingidentity.com/bundle/pingfederate-103/page/hug1564002964375.html) explains how the consent approval works. In the C[onfiguring Authorization Server Settings](https://docs.pingidentity.com/bundle/pingfederate-103/page/ird1564002990806.html), you can enable the option _BYPASS AUTHORIZATION FOR PREVIOUSLY APPROVED PERSISTENT GRANTS_ and then _AUTHORIZATION CODE in REUSE EXISTING PERSISTENT ACCESS GRANTS FOR GRANT TYPES_ panel. This will make the consent approval flow asks only once.
+
 ## Links
 
 Projects:
@@ -39,6 +43,7 @@ Projects:
 - [pingidentity/pingone-sample-registration](https://github.com/pingidentity/pingone-sample-registration)
 - [pingidentity/pingid-python-samples](https://github.com/pingidentity/pingid-python-samples)
 - [pingidentity/pf-authn-js-widget](https://github.com/pingidentity/pf-authn-js-widget)
+- [pingidentity/cdr-ik-sample-consent-ui](https://github.com/pingidentity/cdr-ik-sample-consent-ui)
 
 Guides:
 
