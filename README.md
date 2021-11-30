@@ -28,6 +28,10 @@ Using the default configuration from PingFederate and the setup provided by [OAu
 
 ![OIDC Keys ettings](docs/security-oidc-keys-1.png)
 
+### How to make SSO work by default
+
+SSO does not work with a fresh version of PingFederate. I was using the OAuth Client `ac_oic_client` (the one that is automatically created by OAuth Playground Application). In order to make SSO works as expected, I followed [this documentation](https://docs.pingidentity.com/bundle/pingfederate-93/page/pmr1564002990528.html). In _AUTHENTICATION SESSIONS_ part, you have the checkbox ENABLE _AUTHENTICATION SESSIONS FOR ALL SOURCES_. Just activate it and SSO will work as expected. PingFederate will ask you all the time about the consent of the scopes, even though you had consented previously. Another issue that I'm trying to fix/configure properly. 
+
 ## Links
 
 Projects:
